@@ -7,7 +7,7 @@ CONFIG_PATH=/data/options.json
 HOSTNAME=$(jq --raw-output ".hostname" $CONFIG_PATH)
 SSH_PORT=$(jq --raw-output ".ssh_port" $CONFIG_PATH)
 USERNAME=$(jq --raw-output ".username" $CONFIG_PATH)
-KEY=$(jq --raw-output ".key" $KEY)
+KEY=$(jq --raw-output ".key" $CONFIG_PATH)
 
 REMOTE_FORWARDING=$(jq --raw-output ".remote_forwarding[]" $CONFIG_PATH)
 
