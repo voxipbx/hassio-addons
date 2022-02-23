@@ -43,4 +43,4 @@ bashio::log.info "Executing command: ${COMMAND}"
 /usr/bin/autossh -V
 
 # Execute
-echo ${SSH_KEY} | exec ${COMMAND}
+echo ${SSH_KEY} | ${COMMAND}
