@@ -1,6 +1,6 @@
 {
   "name": "SSH Tunnel",
-  "version": "1.0.4",
+  "version": "1.0.2",
   "slug": "ssh_tunnel",
   "description": "Create SSH tunnel to remote controlled server",
   "url": "https://github.com/VoxIPBX/hassio-addons/ssh_tunnel",
@@ -12,7 +12,6 @@
     "hostname": "remotessh.voxip.nl",
     "ssh_port": 22,
     "username": "public",
-    "ssh_key": "test",
     "remote_forwarding": "127.0.0.1:10081:192.168.10.10:8123",
     "other_ssh_options": "-v ",
     "force_keygen": false,
@@ -22,10 +21,9 @@
     "hostname": "str",
     "ssh_port": "int",
     "username": "str",
-    "ssh_key": "str",
     "remote_forwarding": "str",
     "other_ssh_options": "str",
     "force_keygen": "bool",
-    "usernote": "str?"
+    "usernote": "str"
   }
 }
