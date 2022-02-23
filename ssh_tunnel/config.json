@@ -12,7 +12,7 @@
     "hostname": "remotessh.voxip.nl",
     "ssh_port": 22,
     "username": "public",
-    "remote_forwarding": "127.0.0.1:10081:192.168.10.10:8123",
+    "remote_forwarding": ["127.0.0.1:10081:192.168.10.10:8123"],
     "other_ssh_options": "-v ",
     "force_keygen": false,
     "usernote": ""
@@ -21,7 +21,7 @@
     "hostname": "str",
     "ssh_port": "int",
     "username": "str",
-    "remote_forwarding": "str",
+    "remote_forwarding": ["str"],
     "other_ssh_options": "str",
     "force_keygen": "bool",
     "usernote": "str"
