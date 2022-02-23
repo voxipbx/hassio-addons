@@ -1,6 +1,6 @@
 {
   "name": "SSH Tunnel",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "slug": "ssh_tunnel",
   "description": "Create SSH tunnel to remote controlled server",
   "url": "https://github.com/VoxIPBX/hassio-addons/ssh_tunnel",
