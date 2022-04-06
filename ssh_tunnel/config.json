@@ -16,6 +16,6 @@
   "schema": {
     "username": "str",
     "pubkey": "str",
-    "privkey": "str"
+    "privkey": ["str"]
   }
 }
