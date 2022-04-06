@@ -13,7 +13,7 @@ PRIV_KEY=$(jq --raw-output ".privkey" $CONFIG_PATH)
 #
 
 mkdir -p "$KEY_PATH"
-echo -n "ssh-rsa ${PUB_KEY}" > "${KEY_PATH}/autossh_rsa_key.pub"
+printf '%s' "ssh-rsa ${PUB_KEY}" > "${KEY_PATH}/autossh_rsa_key.pub"
 chmod 400 "${KEY_PATH}/autossh_rsa_key.pub"
 echo "${PRIV_KEY}" > "${KEY_PATH}/autossh_rsa_key"
 chmod 400 "${KEY_PATH}/autossh_rsa_key"
