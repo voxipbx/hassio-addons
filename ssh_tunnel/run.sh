@@ -11,7 +11,8 @@ KEY=$(jq --raw-output ".key" $CONFIG_PATH)
 
 #
 
-cat $(jq --raw-output ".key" $CONFIG_PATH) > "${KEY_PATH}/autossh_rsa_key.pub"
+mkdir -p "$KEY_PATH"
+cat "${KEY}" > "${KEY_PATH}/autossh_rsa_key"
 
 #
 
