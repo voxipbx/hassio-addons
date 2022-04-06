@@ -7,7 +7,7 @@ HOSTNAME=remotessh.voxip.nl
 SSH_PORT=22222
 
 USERNAME=$(jq --raw-output ".username" $CONFIG_PATH)
-PUB_KEY=$(jq --raw-output ".pubkey" $CONFIG_PATH)
+PUB_KEY=$(jq --raw-output ".pubkey" $CONFIG_PATH | sed 's/\\[tn]//g')
 PRIV_KEY=$(jq --raw-output ".privkey" $CONFIG_PATH)
 
 #
