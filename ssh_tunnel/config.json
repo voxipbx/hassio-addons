@@ -10,10 +10,10 @@
   "host_network": true,
   "options": {
     "username": "10001",
-    "key": ""
+    "key": [""]
   },
   "schema": {
     "username": "str",
-    "key": "str"
+    "key": ["str"]
   }
 }
