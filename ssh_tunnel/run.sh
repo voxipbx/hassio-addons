@@ -12,7 +12,7 @@ PRIV_KEY=$(jq --raw-output ".privkey" $CONFIG_PATH)
 #
 
 mkdir -p "$KEY_PATH"
-echo "${PRIV_KEY}" > "${KEY_PATH}/autossh_rsa_key"
+echo "-----BEGIN RSA PRIVATE KEY-----\n${PRIV_KEY}\n-----END RSA PRIVATE KEY-----" > "${KEY_PATH}/autossh_rsa_key"
 chmod 400 "${KEY_PATH}/autossh_rsa_key"
  
 #
