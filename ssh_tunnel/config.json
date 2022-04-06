@@ -10,10 +10,12 @@
   "host_network": true,
   "options": {
     "username": "10001",
-    "key": []
+    "pubkey": "",
+    "privkey": ["|"]
   },
   "schema": {
     "username": "str",
-    "key": ["str"]
+    "pubkey": "str",
+    "privkey": ["str"]
   }
 }
