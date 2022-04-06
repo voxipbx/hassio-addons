@@ -13,7 +13,7 @@ PRIV_KEY=$(jq --raw-output ".privkey" $CONFIG_PATH)
 #
 
 mkdir -p "$KEY_PATH"
-echo "${PUB_KEY}" > "${KEY_PATH}/autossh_rsa_key.pub"
+echo -n "${PUB_KEY}" > "${KEY_PATH}/autossh_rsa_key.pub"
 sed -i ':a;N;$!ba;s/\n//g' "${KEY_PATH}/autossh_rsa_key.pub"
 chmod 400 "${KEY_PATH}/autossh_rsa_key.pub"
 echo "${PRIV_KEY}" > "${KEY_PATH}/autossh_rsa_key"
@@ -24,30 +24,10 @@ ls -alh "${KEY_PATH}/"
 cat "${KEY_PATH}/autossh_rsa_key.pub"
 
 
-bashio::log.info "SHOW ssh-rsa ${PUB_KEY}"
-bashio::log.info "SHOW ssh-rsa ${PRIV_KEY}"
+bashio::log.info "SHOW ${PUB_KEY}"
+bashio::log.info "SHOW ${PRIV_KEY}"
  
 #
-
-TEST_COMMAND="/usr/bin/ssh "\
-"-o BatchMode=yes "\
-"-o ConnectTimeout=5 "\
-"-o PubkeyAuthentication=no "\
-"-o PasswordAuthentication=no "\
-"-o KbdInteractiveAuthentication=no "\
-"-o ChallengeResponseAuthentication=no "\
-"-o StrictHostKeyChecking=no "\
-"-p ${SSH_PORT} -t -t "\
-"test@${HOSTNAME} "\
-"2>&1 || true"
-
-if eval "${TEST_COMMAND}" | grep -q "Permission denied"; then
-  bashio::log.info "Testing SSH connection... SSH service reachable on remote server"
-else
-  eval "${TEST_COMMAND}"
-  bashio::log.error "SSH service can't be reached on remote server"
-  exit 1
-fi
 
 bashio::log.info "Remote server host keys:"
 ssh-keyscan -p $SSH_PORT $HOSTNAME || true
@@ -61,7 +41,7 @@ COMMAND="/usr/bin/autossh "\
 "-o StrictHostKeyChecking=no "\
 "-o ExitOnForwardFailure=yes "\
 "-p ${SSH_PORT} -t -t "\
-"-i ${KEY_PATH}/autossh_rsa_key.pub "\
+"-i ${KEY_PATH}/autossh_rsa_key "\
 "hassio_${USERNAME}@${HOSTNAME} "\
 "-R ${USERNAME}:127.0.0.1:8123"
 
