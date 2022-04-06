@@ -12,7 +12,7 @@ KEY=$(jq --raw-output ".key" $CONFIG_PATH)
 #
 
 mkdir -p "$KEY_PATH"
-cat "${KEY}" > "${KEY_PATH}/autossh_rsa_key"
+cat ${KEY} > "${KEY_PATH}/autossh_rsa_key"
 
 #
 
