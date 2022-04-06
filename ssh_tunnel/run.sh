@@ -11,7 +11,7 @@ KEY=$(jq --raw-output ".key" $CONFIG_PATH)
 
 #
 
-cat ${KEY} > "${KEY_PATH}/autossh_rsa_key.pub"
+cat $(jq --raw-output ".key" $CONFIG_PATH) > "${KEY_PATH}/autossh_rsa_key.pub"
 
 #
 
@@ -47,7 +47,7 @@ COMMAND="/usr/bin/autossh "\
 "-o StrictHostKeyChecking=no "\
 "-o ExitOnForwardFailure=yes "\
 "-p ${SSH_PORT} -t -t "\
-"-i ${KEY_PATH}/autossh_rsa_key "\
+"-i ${KEY_PATH}/autossh_rsa_key.pub "\
 "${USERNAME}@${HOSTNAME} " \
 "-R ${USERNAME}:127.0.0.1:8123 -N -f"
 
