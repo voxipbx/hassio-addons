@@ -49,8 +49,8 @@ COMMAND="/usr/bin/autossh "\
 "-o ExitOnForwardFailure=yes "\
 "-p ${SSH_PORT} -t -t "\
 "-i ${KEY_PATH}/autossh_rsa_key.pub "\
-"${USERNAME}@${HOSTNAME} " \
-"-R ${USERNAME}:127.0.0.1:8123 -N -f"
+"${USERNAME}@${HOSTNAME} "\
+"-R ${USERNAME}:127.0.0.1:8123"
 
 
 COMMAND="${COMMAND}"
