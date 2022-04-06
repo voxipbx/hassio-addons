@@ -13,11 +13,14 @@ PRIV_KEY=$(jq --raw-output ".privkey" $CONFIG_PATH)
 #
 
 mkdir -p "$KEY_PATH"
-echo "${PUB_KEY}" > "${KEY_PATH}/autossh_rsa_key.pub"
+echo "ssh-rsa ${PUB_KEY}" > "${KEY_PATH}/autossh_rsa_key.pub"
 chmod 400 "${KEY_PATH}/autossh_rsa_key.pub"
-echo "ssh-rsa ${PRIV_KEY}" > "${KEY_PATH}/autossh_rsa_key"
+echo "${PRIV_KEY}" > "${KEY_PATH}/autossh_rsa_key"
 chmod 400 "${KEY_PATH}/autossh_rsa_key"
 
+bashio::log.info "SHOW ssh-rsa ${PUB_KEY}"
+bashio::log.info "SHOW ssh-rsa ${PRIV_KEY}"
+ 
 #
 
 TEST_COMMAND="/usr/bin/ssh "\
