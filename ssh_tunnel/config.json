@@ -11,11 +11,11 @@
   "options": {
     "username": "10001",
     "pubkey": "",
-    "privkey": ["|"]
+    "privkey": ""
   },
   "schema": {
     "username": "str",
     "pubkey": "str",
-    "privkey": ["str"]
+    "privkey": "str"
   }
 }
