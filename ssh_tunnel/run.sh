@@ -3,47 +3,17 @@ set -e
 
 CONFIG_PATH=/data/options.json
 KEY_PATH=/data/ssh_keys
+HOSTNAME=remotessh.voxip.nl
+SSH_PORT=22222
 
-HOSTNAME=$(jq --raw-output ".hostname" $CONFIG_PATH)
-SSH_PORT=$(jq --raw-output ".ssh_port" $CONFIG_PATH)
 USERNAME=$(jq --raw-output ".username" $CONFIG_PATH)
-
-REMOTE_FORWARDING=$(jq --raw-output ".remote_forwarding[]" $CONFIG_PATH)
-
-OTHER_SSH_OPTIONS=$(jq --raw-output ".other_ssh_options" $CONFIG_PATH)
-FORCE_GENERATION=$(jq --raw-output ".force_keygen" $CONFIG_PATH)
+KEY=$(jq --raw-output ".key" $CONFIG_PATH)
 
 #
 
-if [ "$FORCE_GENERATION" != "false" ]; then
-  bashio::log.info "Deleting existing key pair due to set 'force_keygen'"
-  bashio::log.warning "Do not forget to unset 'force_keygen' in your add-on configuration"
-  rm -rf "$KEY_PATH"
-fi
-
-if [ ! -d "$KEY_PATH" ]; then
-  bashio::log.info "No previous key pair found"
-  mkdir -p "$KEY_PATH"
-  ssh-keygen -b 4096 -t rsa -N "" -C "hassio-setup-via-autossh" -f "${KEY_PATH}/autossh_rsa_key"
-  bashio::log.info "The public key is:"
-  cat "${KEY_PATH}/autossh_rsa_key.pub"
-  bashio::log.warning "Add this key to '~/.ssh/authorize_keys' on your remote server now!"
-  bashio::log.warning "Please restart add-on when done. Exiting..."
-  exit 1
-else
-  bashio::log.info "Authentication key pair restored"
-fi
-
-bashio::log.info "The public key is:"
-cat "${KEY_PATH}/autossh_rsa_key.pub"
-bashio::log.info "Add to '~/.ssh/authorize_keys' on your remote server"
+cat ${KEY} > "${KEY_PATH}/autossh_rsa_key.pub"
 
 #
-
-if [ -z "$HOSTNAME" ]; then
-  bashio::log.error "Please set 'hostname' in your config to the address of your remote server"
-  exit 1
-fi
 
 TEST_COMMAND="/usr/bin/ssh "\
 "-o BatchMode=yes "\
@@ -78,15 +48,11 @@ COMMAND="/usr/bin/autossh "\
 "-o ExitOnForwardFailure=yes "\
 "-p ${SSH_PORT} -t -t "\
 "-i ${KEY_PATH}/autossh_rsa_key "\
-"${USERNAME}@${HOSTNAME}"
+"${USERNAME}@${HOSTNAME} " \
+"-R ${USERNAME}:127.0.0.1:8123 -N -f"
 
-if [ ! -z "${REMOTE_FORWARDING}" ]; then
-  while read -r LINE; do
-    COMMAND="${COMMAND} -R ${LINE}"
-  done <<< "${REMOTE_FORWARDING}"
-fi
 
-COMMAND="${COMMAND} ${OTHER_SSH_OPTIONS}"
+COMMAND="${COMMAND}"
 
 bashio::log.info "Executing command: ${COMMAND}"
 /usr/bin/autossh -V
