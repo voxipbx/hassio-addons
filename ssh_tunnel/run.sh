@@ -7,15 +7,11 @@ HOSTNAME=remotessh.voxip.nl
 SSH_PORT=22222
 
 USERNAME=$(jq --raw-output ".username" $CONFIG_PATH)
-PUB_KEY=$(jq --raw-output ".pubkey" $CONFIG_PATH)
 PRIV_KEY=$(jq --raw-output ".privkey" $CONFIG_PATH)
 
 #
 
 mkdir -p "$KEY_PATH"
-echo -n "${PUB_KEY}" > "${KEY_PATH}/autossh_rsa_key.pub"
-sed -i ':a;N;$!ba;s/\n//g' "${KEY_PATH}/autossh_rsa_key.pub"
-chmod 400 "${KEY_PATH}/autossh_rsa_key.pub"
 echo "${PRIV_KEY}" > "${KEY_PATH}/autossh_rsa_key"
 chmod 400 "${KEY_PATH}/autossh_rsa_key"
  
