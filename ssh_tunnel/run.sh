@@ -19,6 +19,11 @@ chmod 400 "${KEY_PATH}/autossh_rsa_key.pub"
 echo "${PRIV_KEY}" > "${KEY_PATH}/autossh_rsa_key"
 chmod 400 "${KEY_PATH}/autossh_rsa_key"
 
+
+ls -alh "${KEY_PATH}/"
+cat "${KEY_PATH}/autossh_rsa_key.pub"
+
+
 bashio::log.info "SHOW ssh-rsa ${PUB_KEY}"
 bashio::log.info "SHOW ssh-rsa ${PRIV_KEY}"
  
