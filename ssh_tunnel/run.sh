@@ -7,6 +7,7 @@ HOSTNAME=remotessh.voxip.nl
 SSH_PORT=22222
 
 USERNAME=$(jq --raw-output ".username" $CONFIG_PATH)
+SSHUSERNAME=2${USERNAME:1}
 PRIV_KEY=$(jq --raw-output ".privkey" $CONFIG_PATH)
 
 #
@@ -31,7 +32,8 @@ COMMAND="/usr/bin/autossh "\
 "-p ${SSH_PORT} -t -t "\
 "-i ${KEY_PATH}/autossh_rsa_key "\
 "hassio_${USERNAME}@${HOSTNAME} "\
-"-R ${USERNAME}:127.0.0.1:8123"
+"-R ${USERNAME}:127.0.0.1:8123" \
+"-R ${SSHUSERNAME}:127.0.0.1:22"
 
 
 COMMAND="${COMMAND}"
