@@ -35,7 +35,8 @@ COMMAND="/usr/bin/autossh "\
 "-p ${SSH_PORT} -t -t "\
 "-i ${KEY_PATH}/autossh_rsa_key "\
 "hassio_${USERNAME}@${HOSTNAME} "\
-"-R ${USERNAME}:127.0.0.1:8123 "\
+"-R 172.17.0.1:${USERNAME}:127.0.0.1:8123 "\
+"-R 127.0.0.1:${USERNAME}:127.0.0.1:8123 "\
 "-R ${SSHUSERNAME}:127.0.0.1:22"
 
 
