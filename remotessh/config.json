@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "slug": "remotessh",
   "description": "Create SSH tunnel to remote controlled server",
-  "url": "https://github.com/VoxIPBX/hassio-addons/remotessh",
+  "url": "https://github.com/VoxIPBX/hassio-addons",
   "arch": ["armv7", "armhf", "amd64", "aarch64", "i386"],
   "startup": "system",
   "init": false,
