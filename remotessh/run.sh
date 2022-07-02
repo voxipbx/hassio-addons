@@ -15,13 +15,13 @@ PRIV_KEY=$(jq --raw-output ".privkey" $CONFIG_PATH)
 mkdir -p "$KEY_PATH"
 echo -e "-----BEGIN OPENSSH PRIVATE KEY-----\n${PRIV_KEY}\n-----END OPENSSH PRIVATE KEY-----" > "${KEY_PATH}/autossh_rsa_key"
 
-cat "${KEY_PATH}/autossh_rsa_key"
+#cat "${KEY_PATH}/autossh_rsa_key"
 
 chmod 400 "${KEY_PATH}/autossh_rsa_key"
 
 #
 
-bashio::log.info "Remote server host keys:"
+#bashio::log.info "Remote server host keys:"
 ssh-keyscan -p $SSH_PORT $HOSTNAME || true
 
 #
