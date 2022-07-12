@@ -1,16 +1,16 @@
 {
   "name": "RemoteSSH",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "slug": "remotessh",
   "description": "Create SSH tunnel to remote controlled server",
-  "url": "https://github.com/VoxIPBX/hassio-addons",
+  "url": "https://github.com/voxipbx/hassio-addons/blob/main/remotessh",
   "arch": ["armv7", "armhf", "amd64", "aarch64", "i386"],
   "startup": "system",
   "init": false,
   "boot": "auto",
   "host_network": true,
   "options": {
-    "username": "10001",
+    "username": "10005",
     "privkey": ""
   },
   "schema": {
