@@ -8,6 +8,7 @@ SSH_PORT=22222
 
 USERNAME=$(jq --raw-output ".username" $CONFIG_PATH)
 SSHUSERNAME=2${USERNAME:1}
+SSHMONITOR=3${USERNAME:1}
 PRIV_KEY=$(jq --raw-output ".privkey" $CONFIG_PATH)
 
 #
@@ -27,7 +28,7 @@ ssh-keyscan -p $SSH_PORT $HOSTNAME || true
 #
 
 COMMAND="/usr/bin/autossh "\
-" -M 0 -N "\
+" -M ${SSHMONITOR} -N "\
 "-o ServerAliveInterval=30 "\
 "-o ServerAliveCountMax=3 "\
 "-o StrictHostKeyChecking=no "\
